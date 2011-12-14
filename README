@@ -1,0 +1,41 @@
+@annotate Вообще вся эта операция была разовая, а вот модуль, пожалуй, будет ещё расти.
+@usage : добавить app как обычно в django:
+INSTALLED_APPS = (
+    ...
+    'kladr',
+    'kladr.*',
+    ...
+)
+
+и в urls.py(urlpatterns) добавить:
+(r'^kladr/(?P<target>.*)$', 'kladr.views.index'),
+вызов http:
+kladr/getList?code=RRDDDCCCVVVSSSHHss
+использование в классах django:
+from kladr.kladdress import Kladdress
+....
+addr=Kladdress().get_name('RRDDDCCCVVVSSSHHss')
+
+@author: serge <serge@shtripling.com>
+
+@setup:
+
+#!!Ставим pgdbf, потом 2 заклинания в шеле.(подставить данные), в каталоге с распакованым КЛАДРом
+
+pg_host='localhost'
+pg_user='postgres'
+pg_host='django_db'
+for i in $(ls |grep -i dbf$) ; do pgdbf $i |iconv -f 866 > $i.sql ; done
+for i in $(ls |grep sql$) ; do psql -h $pg_host -U $pg_user $pg_db < $i ; done
+
+
+
+Таблички создаются из django, да-да:
+python manage.py syncdb
+Теперь заполняем таблички:
+запросы в fill.tables.sql(а вот имена таблиц можно и поменять)
+
+
+@annotate: попытка автоматически создать полноценную базу со связями провалилась.
+Вернусь к ней позже - соберу полноценный модуль джанго для работы с КЛАДРом, если ещё не лень будет
+Ниже заметки и наброски для себя на будущее
