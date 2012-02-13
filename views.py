@@ -12,7 +12,8 @@ def index(request, target=None):
     a_handlers = {
         'getRegions': get_list,
         'getList': get_list,
-        'getName': get_name
+        'getName': get_name,
+        'getPathCodes': get_path_codes,
     }
     try:
         res = a_handlers[target](request)
@@ -26,7 +27,7 @@ def get_list(request):
         fields = ('code', 'name')
     else:
         fields = None
-    d = Kladdress().get_list(code)
+    d = Kladdress().get_list(code,request.REQUEST.get('query', ''))
     data = [model_to_dict(x) for x in d]
     if fields:
         for k,data_item in enumerate(data):
@@ -40,5 +41,10 @@ def get_list(request):
 
 def get_name(request):
     code = request.REQUEST.get('code')
-    d = Kladdress().get_name(code)
+    d = Kladdress().get_name(code)['name']
+    return ret_plain(d)
+
+def get_path_codes(request):
+    code = request.REQUEST.get('code')
+    d = Kladdress().get_name(code)['codes']
     return ret_plain(d)

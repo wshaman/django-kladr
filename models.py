@@ -12,9 +12,8 @@ class Region(models.Model):
     uno = models.CharField(u'УНО', max_length=4, blank=True, null=True)
     status = models.CharField(u'Статус', max_length=1)
 
-
     def __str__(self):
-        return '%s %s'%(self.name, self.socr)
+        return u'%s %s'%(self.name, self.socr)
 
 # районы областей
 class District(models.Model):
@@ -28,7 +27,7 @@ class District(models.Model):
     status = models.CharField(u'Статус', max_length=1)
 #    region = models.ForeignKey(Region, to_field='code', verbose_name=u'Регион')
     def __str__(self):
-        return '%s %s'%(self.name, self.socr)
+        return u'%s %s'%(self.name, self.socr)
 
 # города
 class City(models.Model):
@@ -47,7 +46,7 @@ class City(models.Model):
 #    region = models.ForeignKey(Region, to_field='code', verbose_name=u'Регион', blank=True, null=True)
 #    district = models.ForeignKey(District, to_field='code', verbose_name=u'Район', blank=True, null=True)
     def __str__(self):
-        return '%s %s'%(self.socr, self.name)
+        return u'%s %s'%(self.socr, self.name)
 
 #(нас.пункты)
 class Ville(models.Model):
@@ -63,7 +62,7 @@ class Ville(models.Model):
 #    district = models.ForeignKey(District, to_field='code', verbose_name=u'Район', blank=True, null=True)
 #    city = models.ForeignKey(City, to_field='code', verbose_name=u'Город', blank=True, null=True)
     def __str__(self):
-        return '%s %s'%(self.socr, self.name)
+        return u'%s %s'%(self.socr, self.name)
 
 #улицы
 class Street(models.Model):
@@ -80,7 +79,7 @@ class Street(models.Model):
 #    city = models.ForeignKey(City, to_field='code', verbose_name=u'Город', blank=True, null=True)
 #    ville = models.ForeignKey(Ville, to_field='code', verbose_name=u'Нас. пункт', blank=True, null=True)
     def __str__(self):
-        return '%s %s'%(self.socr, self.name)
+        return u'%s %s'%(self.socr, self.name)
 
 #дома
 class House(models.Model):
@@ -98,7 +97,7 @@ class House(models.Model):
 #    ville = models.ForeignKey(Ville, to_field='code', verbose_name=u'Нас. пункт', blank=True, null=True)
 #    street = models.ForeignKey(Street, to_field='code', verbose_name=u'Улица', blank=True, null=True)
     def __str__(self):
-        return '%s'%(self.name)
+        return u'%s'%(self.name)
 
 #Изменённые названия
 class Altnames(models.Model):
